@@ -1,0 +1,27 @@
+.nav {
+  position: fixed-top;
+}
+.transparent {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.navbar.transparent.navbar-inverse .navbar-inner {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.left-links {
+  padding-left: 25px;
+}
+.right-links{
+    padding-right: 25px;
+}
+
+.nav-name {
+  color: white;
+}
+
+
+#navbar a {
+  color: white;
+  font: 1rem;
+}

@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+// import { Button, Alert, Container, Card, Row, Col } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from './Components/Navbar';
+import './css/App.css';
+import Features from "./Components/HomePage/Features";
+import $ from 'jquery';
+import Header from './Components/HomePage/Header';
 
-function App() {
+
+
+
+
+const  App = () => {
+
+  //find and style all nav-links
+  useEffect(() => {
+    let links = $(document.getElementsByClassName("nav-link"));
+    links.addClass("text-white");
+    console.log(links);
+
+});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
+      <body>
+      <NavBar sticky="top" />
+      <Header />
+      <Features />
+      </body>
     </div>
   );
 }

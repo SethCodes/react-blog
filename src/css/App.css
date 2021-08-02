@@ -1,0 +1,11 @@
+body{
+    /* background-image: url(/src/img/people.jpg); */
+
+}
+h1, p{
+    color: white;
+}
+
+.long{
+    height: 1000px;
+}
