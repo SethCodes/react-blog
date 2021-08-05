@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import '../src/index.css';
 // import { Button, Alert, Container, Card, Row, Col } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from './Components/Navbar';

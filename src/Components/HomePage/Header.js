@@ -60,7 +60,7 @@ const Header = () => {
             </Container>
           </Row>
           <Row id="headline">
-            <Col md={7} id="headlineH1" className="col-center text-left">
+            <Col lg={7} md={12} sm={12} id="headlineH1" className="col-center text-left">
               <h1>{data.art1.header}</h1>
 
               <p sm={6} className="date">
@@ -71,7 +71,7 @@ const Header = () => {
               </p>
             </Col>
             
-            <Col md={4} id="header-scroll" className="col-center scrollbar-red">
+            <Col lg={4} md={12} sm={12} id="header-scroll" className="col-center scrollbar-red">
             <div className="scroll-div">
               <h1>{data.art1.header}</h1>
 
@@ -127,10 +127,10 @@ const Header = () => {
                     <h6>{data.art3.header}</h6>
                     <p>{data.art3.author}</p>
                   </Col>
-                  <Col>
+                  <Col className="last-col">
                     <img src={people} alt="people" />
                   </Col>
-                  <Col className="breakCopy">
+                  <Col className="breakCopy last-col">
                     <h6>{data.art3.header}</h6>
                     <p>{data.art3.author}</p>
                   </Col>

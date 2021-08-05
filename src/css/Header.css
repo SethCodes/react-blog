@@ -1,165 +1,188 @@
-.overlay{
-    position: absolute;
-    background-color: rgba(000, 000, 255, 0.5);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100vh;
+.overlay {
+  position: absolute;
+  background-color: rgba(000, 000, 255, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  min-width: 839px;
 }
 
-#header{
-    background-image: url(/src/img/people.jpg);
-    background-size: cover;
-    padding: 0 50px;
-    height: 100vh;
-    background-color: blue;
+#header {
+  background-image: url(/src/img/people.jpg);
+  background-size: cover;
+  padding: 0 50px;
+  height: 100vh;
+  background-color: blue;
 }
 
 /* Category Nav */
-#category-nav{
-    margin-top: 55px;
-    display: block;
-    width: 100%;
-padding: 0px 50px;}
+#category-nav {
+  margin-top: 55px;
+  display: block;
+  width: 100%;
+  padding: 0px 50px;
+}
 
 .transparent {
-    background: rgba(0,0,0,0.4);
-    
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .navbar.transparent.navbar-inverse .navbar-inner {
-    background: rgba(0,0,0,0.4);
-    padding: 0 100px;
- }
-
- Nav.Link{
-     color: white;
- }
-
- .text-white{
-    color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0 100px;
 }
 
-.nav-2-item{
-    padding: 10px;
-    font-size: 1.5rem;
-    margin: 20px 20px 20px 0;
-    
-}
-.line{
-   border-top: 1px solid rgba(255,255,255,0.4);
-   border-bottom: 1px solid rgba(255,255,255,0.4);
+Nav.Link {
+  color: white;
 }
 
+.text-white {
+  color: white;
+}
 
+.nav-2-item {
+  padding: 10px;
+  font-size: 1.5rem;
+  margin: 20px 20px 20px 0;
+}
+
+.line {
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
 
 /* MAIN HEADLINE */
-    #headline{
-        padding: 5% 30px 0;
-        border-radius: 10px;
-    }
-    
-#headlineH1 h1{
-    font-size: 50px;
-    font-weight: 600;
-    margin: 0px;
-    display: flex;
-    justify-content: start;
-align-items: left;
+#headline {
+  padding: 5% 30px 0;
+  border-radius: 10px;
 }
 
-.col-center{
-    /* background-color: rgba(0, 0, 0, 0.4); */
-    padding: 10px 30px;
-    border-radius: 20px;
-    margin: auto auto;
+#headlineH1 h1 {
+  font-size: 50px;
+  font-weight: 600;
+  margin: 0px;
+  display: flex;
+  justify-content: start;
+  align-items: left;
 }
 
-#headlineH1 .author{
-    display: inline-block;
-    margin-left: 20px;
-    font-size: 1.5rem;
-color: lightblue;
+.col-center {
+  padding: 10px 30px;
+  border-radius: 20px;
+  margin: auto auto;
 }
 
-#headlineH1 .date{
-    display: inline-block;
+#headlineH1 .author {
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 1.5rem;
+  color: lightblue;
+}
 
-font-size: 1rem;
-color: lightgray;
+#headlineH1 .date {
+  display: inline-block;
+  font-size: 1rem;
+  color: lightgray;
 }
-.author{
-    display: inline-block;
-    color: lightblue;
-    margin-left: 20px;
+
+.author {
+  display: inline-block;
+  color: lightblue;
+  margin-left: 20px;
 }
-.date{
-    display: inline-block;
+
+.date {
+  display: inline-block;
 }
 
 /* SCROLL HEADLINE */
 
-#header-scroll{
-max-height: 250px;
-overflow-y: scroll;
-padding: 20px;
-border: 1px solid red;
-margin-right: 25px;
+#header-scroll {
+  max-height: 250px;
+  overflow-y: scroll;
+  padding: 20px;
+  border: 1px solid red;
+  margin-right: 25px;
 }
-#header-scroll hr{
-    color: red;
-}
-
-.scroll-div{
-    padding-left: 20px;
+#header-scroll hr {
+  color: red;
 }
 
-.scrollbar-red{
-    scrollbar-color: red;
-
-}
-#header-scroll h1{
-    font-size: 25px;
+.scroll-div {
+  padding-left: 20px;
 }
 
+.scrollbar-red {
+  scrollbar-color: red;
+}
+
+#header-scroll h1 {
+  font-size: 25px;
+}
 
 /* BREAKING NEWS */
-#breakingCon{
-    position: absolute;
-    left: 50px;
-    bottom: 0px;
-    height: 150px;
-    width: 60%;
-    color: black;
-    padding: 0;
-    margin: 0;
-}
-#breakingSec{
-    padding: 0 30px;
-    background-color: #ffffff;
-}
-#breakingCon img{
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    padding: 10px;
+#breakingCon {
+  position: absolute;
+  left: 50px;
+  bottom: 0px;
+  height: 150px;
+  width: 60%;
+  color: black;
+  padding: 0;
+  margin: 0;
 }
 
-.breakCopy{
-    
-    padding: 10px;
+@media only screen and (max-width: 1123px){
+
+.last-col{
+    display: none;
 }
-.breakCopy p{
-    color: lightblue;
-    font-size: 12px;
+.rColImg{
+    display: none;
 }
 
-.breakingHead{
-    background: rgba(0, 0, 0, 0);
+
+
+
+
+
 }
-.h5{
-    background-color: red;
-    margin: 0;
-    width: 30%
+
+@media only screen and (max-width: 991px){
+    #breakingCon{
+        display: none;
+    }
+}
+#breakingSec {
+  padding: 0 30px;
+  background: white;
+  background-color: #ffffff;
+  position: relative;
+  bottom: -2px;
+}
+#breakingCon img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  padding: 10px;
+}
+
+.breakCopy {
+  padding: 10px;
+}
+
+.breakCopy p {
+  color: lightblue;
+  font-size: 12px;
+}
+
+.breakingHead {
+  background: rgba(0, 0, 0, 0);
+}
+.h5 {
+  background-color: red;
+  margin: 0;
+  width: 30%;
 }
