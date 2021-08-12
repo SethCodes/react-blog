@@ -8,6 +8,9 @@
   height: 100vh;
   min-width: 839px;
 }
+.scroll-div a{
+  text-decoration: none;
+}
 
 #header {
   background-image: url(/src/img/people.jpg);
@@ -215,6 +218,31 @@ Nav.Link {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+.featureImgOverlay{
+  position: absolute;
+  background: rgba(255, 000, 000, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+}
+.featCopy{
+  display: flex;
+  align-content: flex-end;
+}
+
+.imgCon{
+  position: relative;
+  opacity: 1;
+  object-fit: cover;
+}
+.imgAuthor{
+  color: black;
+  font-size: 12px;
 }
 
 .date-author p{
@@ -260,4 +288,16 @@ Nav.Link {
 }
 .featRRow{
     padding-top: 0;
+}
+
+
+/* POST */
+.post{
+  margin-top: 100;
+  color: black;
+  margin-left: 50px;
+}
+
+.postDiv{
+  color: black;
 }

@@ -3,6 +3,10 @@ import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/navbar.css";
 import logo from "../img/Icon.png";
+import Home from '../Components/HomePage/Header';
+import {Link} from 'react-router-dom';
+
+
 
 const NavBar = () => {
   return (
