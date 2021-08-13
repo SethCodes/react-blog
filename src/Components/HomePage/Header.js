@@ -6,11 +6,8 @@ import people from "../../img/people.jpg";
 // import { posts } from "../../posts.js";
 import Article from "./Article";
 import axios from "axios";
-import {Link, withRouter} from 'react-router-dom';
-import About from '../About';
-
-
-
+import { Link, withRouter, BrowserRouter } from "react-router-dom";
+import About from "../About";
 
 const Header = () => {
   const url = `http://newsapi.org/v2/everything?q=ai&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
@@ -18,10 +15,7 @@ const Header = () => {
 
   const [result, setResult] = useState(null);
   const [bgImage, setBgImg] = useState(null);
-  const [featImg, setFeatImg] = useState({people});
-
-
-  
+  const [featImg, setFeatImg] = useState({ people });
 
   useEffect(() => {
     axios.get(url).then((response) => {
@@ -29,26 +23,22 @@ const Header = () => {
       setBgImg(response.data.articles[0].urlToImage);
       setFeatImg(response.data.articles[14].urlToImage);
       console.log(response.data.articles);
-      
-    })
-    
-      console.log(result);
-      
+    });
 
+    console.log(result);
   }, []);
 
-//   const mainTitle = result.length ? (<div>
-//   <Link to={'/' + result.id}>
-//     <h1>{!result ? "Loading" : result[0].title}</h1>
-// </Link>
-// <p sm={6} className="date">
-//   {!result ? "loading" : result[0].publishedAt}
-// </p>
-// <p sm={6} className="author lead">
-//   {!result ? "loading" : result[0].author}
-// </p>
-//   </div>):(console.log());
-
+  //   const mainTitle = result.length ? (<div>
+  //   <Link to={'/' + result.id}>
+  //     <h1>{!result ? "Loading" : result[0].title}</h1>
+  // </Link>
+  // <p sm={6} className="date">
+  //   {!result ? "loading" : result[0].publishedAt}
+  // </p>
+  // <p sm={6} className="author lead">
+  //   {!result ? "loading" : result[0].author}
+  // </p>
+  //   </div>):(console.log());
 
   return (
     <div>
@@ -96,7 +86,7 @@ const Header = () => {
               id="headlineH1"
               className="col-center text-left"
             >
-            {/* {mainTitle} */}
+              {/* {mainTitle} */}
               <h1>{!result ? "Loading" : result[0].title}</h1>
 
               <p sm={6} className="date">
@@ -121,21 +111,16 @@ const Header = () => {
                   : result.slice(3, 7).map((article, key) => {
                       return (
                         <div key={key}>
-                        {/* <BrowserRouter> */}
-                        <Link to={'/' + article.title}>
-                        {/* <a href={article.url} target="_blank" rel="noreferrer"> */}
-                          <h1>{article.title}</h1>
-
-                          <p sm={6} className="date">
-                            {article.publishedAt}
-                          </p>
-                          <p sm={6} className="author lead">
-                            {article.author}
-                          </p>
-                          </Link>
-                          {/* </a> */}
+                          <a href={"/" + article.title}>
+                            <h1>{article.title}</h1>
+                            <p sm={6} className="date">
+                              {article.publishedAt}
+                            </p>
+                            <p sm={6} className="author lead">
+                              {article.author}
+                            </p>
+                          </a>
                           <hr />
-                          {/* </BrowserRouter> */}
                         </div>
                       );
                     })}
@@ -183,57 +168,68 @@ const Header = () => {
       <Container id="features" fluid>
         <Row>
           <Col className=" text-start feature-left" lg={3} md={0} sm={0}>
-            {!result ? "Loading" : result.slice(7, 10).map((article) => {
-              return (
-                <Row>
-                  <Article
-                    header={article.title}
-                    date={article.publishedAt}
-                    author={article.author}
-                  />
-                </Row>
-              );
-            })}
+            {!result
+              ? "Loading"
+              : result.slice(7, 10).map((article) => {
+                  return (
+                    <Row>
+                      <Article
+                        header={article.title}
+                        date={article.publishedAt}
+                        author={article.author}
+                      />
+                    </Row>
+                  );
+                })}
           </Col>
 
-          <Col className="imgCon" md={6} sm={12} style={{ backgroundImage: "url(" + featImg + ")" }}>
+          <Col
+            className="imgCon"
+            md={6}
+            sm={12}
+            style={{ backgroundImage: "url(" + featImg + ")" }}
+          >
             <div className="featureImgOverlay">
-          <Row className="featCopy">
-            {/* <Col className=""> */}
-          <h1 >{!result ? "Loading" : result[14].title}</h1>
-          
-<Col>
+              <Row className="featCopy">
+                {/* <Col className=""> */}
+                <h1>{!result ? "Loading" : result[14].title}</h1>
 
-          <p className="date">{!result ? "Loading" : result[14].publishedAt}</p>
-</Col>
-<Col>
-          <p className="author lead">{!result ? "Loading" : result[14].author}</p>
+                <Col>
+                  <p className="date">
+                    {!result ? "Loading" : result[14].publishedAt}
+                  </p>
+                </Col>
+                <Col>
+                  <p className="author lead">
+                    {!result ? "Loading" : result[14].author}
+                  </p>
+                </Col>
 
-</Col>
-          
-          {/* </Col> */}
-          </Row>
+                {/* </Col> */}
+              </Row>
             </div>
           </Col>
 
           <Col className="feature-right" md={3} sm={12}>
-            {!result ? "Loading" : result.slice(10, 14).map((article) => {
-              return (
-                <Row className="featRRow">
-                  <Col>
-                    <img
-                      className="rColImg"
-                      src={article.urlToImage}
-                      alt="people"
-                    />
-                  </Col>
-                  <Col>
-                    <h6>{article.title}</h6>
-                    <p className=" imgAuthor lead">{article.author}</p>
-                  </Col>
-                </Row>
-              );
-            })}
+            {!result
+              ? "Loading"
+              : result.slice(10, 14).map((article) => {
+                  return (
+                    <Row className="featRRow">
+                      <Col>
+                        <img
+                          className="rColImg"
+                          src={article.urlToImage}
+                          alt="people"
+                        />
+                      </Col>
+                      <Col>
+                        <h6>{article.title}</h6>
+                        <p className=" imgAuthor lead">{article.author}</p>
+                      </Col>
+                    </Row>
+                  );
+                })}
           </Col>
         </Row>
       </Container>
@@ -241,4 +237,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;
