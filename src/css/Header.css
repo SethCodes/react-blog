@@ -301,3 +301,16 @@ Nav.Link {
 .postDiv{
   color: black;
 }
+#headline a{
+  color: white;
+  text-decoration: none;
+}
+#breakingSec a{
+  color: black;
+  text-decoration: none;
+}
+#features a{
+  color: black;
+  text-decoration: none;
+}
+

@@ -4,34 +4,26 @@ import "../src/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./Components/Navbar";
 import "./css/App.css";
-import $ from "jquery";
 import Header from "./Components/HomePage/Header";
 import Post from './Components/Post';
 import About from './Components/About';
 
 
 
-const App = () => {
-  //find and style all nav-links
-  useEffect(() => {
-    let links = $(document.getElementsByClassName("nav-link"));
-    links.addClass("text-white");
-  });
+
+
+function App () {
+  
 
   return (
       <BrowserRouter>
-    <div className="App">
-      
         <NavBar sticky="top" />
+    <div className="App">
         <Switch>
         <Route exact path="/" component={Header}/>
-        <Route exact path="/about" component={About}/>
-        <Route path="/:title" component={withRouter(Post)}/>
-
+        <Route exact path="/react-blog/about" component={About}/>
+        <Route exact path="/:title" component={Post}/>
         </Switch>
-
-        
-      
     </div>
       </BrowserRouter>
   );

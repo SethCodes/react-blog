@@ -6,39 +6,47 @@ import people from "../../img/people.jpg";
 // import { posts } from "../../posts.js";
 import Article from "./Article";
 import axios from "axios";
-import { Link, withRouter, BrowserRouter } from "react-router-dom";
-import About from "../About";
+import {useSelector, useDispatch} from 'react-redux';
+import {updateUrl} from '../../actions';
+import {BrowserRouter as Router, Link, BrowserRouter} from 'react-router-dom';
+
+
 
 const Header = () => {
-  const url = `http://newsapi.org/v2/everything?q=ai&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
-  // const url = `http://newsapi.org/v2/everything?q=ai&apiKey=${APIKEY}`;
 
+  //redux 
+  const stateUrl = useSelector(state => state.url)
+  const dispatch = useDispatch();
+
+  
   const [result, setResult] = useState(null);
   const [bgImage, setBgImg] = useState(null);
   const [featImg, setFeatImg] = useState({ people });
+  const [category, setCategory] = useState('ai');
+  const newUrl = `http://newsapi.org/v2/everything?q=${category}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
+  // const url = `http://newsapi.org/v2/everything?q=ai&apiKey=${APIKEY}`;
+
+  const categoryClicked = (e) => {
+    
+    setCategory(e.target.innerHTML);
+
+  }
+
+  console.log(" current state is: " + stateUrl);
+
 
   useEffect(() => {
-    axios.get(url).then((response) => {
+    axios.get(stateUrl).then((response) => {
       setResult(response.data.articles);
       setBgImg(response.data.articles[0].urlToImage);
       setFeatImg(response.data.articles[14].urlToImage);
-      console.log(response.data.articles);
-    });
+      
 
-    console.log(result);
-  }, []);
+    }).then(() => dispatch(updateUrl(newUrl)));
+    console.log('changed state url: '+ stateUrl);
 
-  //   const mainTitle = result.length ? (<div>
-  //   <Link to={'/' + result.id}>
-  //     <h1>{!result ? "Loading" : result[0].title}</h1>
-  // </Link>
-  // <p sm={6} className="date">
-  //   {!result ? "loading" : result[0].publishedAt}
-  // </p>
-  // <p sm={6} className="author lead">
-  //   {!result ? "loading" : result[0].author}
-  // </p>
-  //   </div>):(console.log());
+  }, [category, stateUrl]);
+
 
   return (
     <div>
@@ -53,25 +61,25 @@ const Header = () => {
             <Container id="category-nav" className="line transparent" fluid>
               <Navbar className="">
                 <Nav className="">
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     World
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Politics
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Health
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Business
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Tech
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Environment
                   </Nav.Link>
-                  <Nav.Link className="nav-2-item" href="#">
+                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
                     Sports
                   </Nav.Link>
                 </Nav>
@@ -87,15 +95,20 @@ const Header = () => {
               className="col-center text-left"
             >
               {/* {mainTitle} */}
-              <h1>{!result ? "Loading" : result[0].title}</h1>
 
+              <h1>
+                {!result ? (
+                  "Loading"
+                ) : (
+                  <a href={"/" + result[0].title}>{result[0].title}</a>
+                )}
+              </h1>
               <p sm={6} className="date">
                 {!result ? "loading" : result[0].publishedAt}
               </p>
               <p sm={6} className="author lead">
                 {!result ? "loading" : result[0].author}
               </p>
-              <a href="/about">About</a>
             </Col>
 
             <Col
@@ -108,10 +121,11 @@ const Header = () => {
               <div className="scroll-div">
                 {!result
                   ? "loading"
-                  : result.slice(3, 7).map((article, key) => {
+                  : result.slice(3, 7).map((article, index) => {
                       return (
-                        <div key={key}>
-                          <a href={"/" + article.title}>
+                        <div key={index}>
+                        <BrowserRouter>
+                          <Link to={"/react-blog/" + article.title}>
                             <h1>{article.title}</h1>
                             <p sm={6} className="date">
                               {article.publishedAt}
@@ -119,7 +133,8 @@ const Header = () => {
                             <p sm={6} className="author lead">
                               {article.author}
                             </p>
-                          </a>
+                          </Link>
+                          </BrowserRouter>
                           <hr />
                         </div>
                       );
@@ -134,29 +149,31 @@ const Header = () => {
             </Row>
             <Row id="breakingSec">
               <Col md={12}>
-                <Row className="breakingNewsItem">
-                  <Col>
-                    <img
-                      src={!result ? "loading" : result[1].urlToImage}
-                      alt="people"
-                    />
-                  </Col>
-                  <Col className="breakCopy">
-                    <h6>{!result ? "loading" : result[1].title}</h6>
-                    <p>{!result ? "loading" : result[1].author}</p>
-                  </Col>
+                {!result ? (
+                  "Loading..."
+                ) : (
+                  <Row className="breakingNewsItem">
+                    <Col>
+                      <img src={result[1].urlToImage} alt="people" />
+                    </Col>
+                    <Col className="breakCopy">
+                      <a href={"/" + result[1].title}>
+                        <h6>{result[1].title}</h6>
+                      </a>
+                      <p>{result[1].author}</p>
+                    </Col>
 
-                  <Col>
-                    <img
-                      src={!result ? "loading" : result[2].urlToImage}
-                      alt="people"
-                    />
-                  </Col>
-                  <Col className="breakCopy">
-                    <h6>{!result ? "loading" : result[2].title}</h6>
-                    <p>{!result ? "loading" : result[2].author}</p>
-                  </Col>
-                </Row>
+                    <Col>
+                      <img src={result[0].urlToImage} alt="people" />
+                    </Col>
+                    <Col className="breakCopy">
+                      <a href={"/" + result[2].title}>
+                        <h6>{result[2].title}</h6>
+                      </a>
+                      <p>{result[2].author}</p>
+                    </Col>
+                  </Row>
+                )}
               </Col>
               <Col md={4}></Col>
             </Row>
@@ -174,6 +191,7 @@ const Header = () => {
                   return (
                     <Row>
                       <Article
+                        link={article.title}
                         header={article.title}
                         date={article.publishedAt}
                         author={article.author}
@@ -192,7 +210,13 @@ const Header = () => {
             <div className="featureImgOverlay">
               <Row className="featCopy">
                 {/* <Col className=""> */}
-                <h1>{!result ? "Loading" : result[14].title}</h1>
+                {!result ? (
+                  "Loading"
+                ) : (
+                  <a href={"/" + result[14].title}>
+                    <h1>{result[14].title}</h1>
+                  </a>
+                )}
 
                 <Col>
                   <p className="date">
@@ -211,25 +235,29 @@ const Header = () => {
           </Col>
 
           <Col className="feature-right" md={3} sm={12}>
-            {!result
-              ? "Loading"
-              : result.slice(10, 14).map((article) => {
-                  return (
-                    <Row className="featRRow">
-                      <Col>
-                        <img
-                          className="rColImg"
-                          src={article.urlToImage}
-                          alt="people"
-                        />
-                      </Col>
-                      <Col>
-                        <h6>{article.title}</h6>
-                        <p className=" imgAuthor lead">{article.author}</p>
-                      </Col>
-                    </Row>
-                  );
-                })}
+            <Row className="featRRow">
+              {!result
+                ? "Loading"
+                : result.slice(10, 14).map((article) => {
+                    return (
+                      <div className="featRRow">
+                        <Col>
+                          <img
+                            className="rColImg"
+                            src={article.urlToImage}
+                            alt="people"
+                          />
+                        </Col>
+                        <Col>
+                          <a href={"/" + article.title}>
+                            <h6>{article.title}</h6>
+                          </a>
+                          <p className=" imgAuthor lead">{article.author}</p>
+                        </Col>
+                      </div>
+                    );
+                  })}
+            </Row>
           </Col>
         </Row>
       </Container>
