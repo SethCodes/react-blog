@@ -18,7 +18,7 @@ function App () {
     <div className="App">
         <NavBar sticky="top" />
         <Switch>
-          <Route exact path="/#/" component={Header}/>
+          <Route exact path="/react-blog/#/" component={Header}/>
           <Route path="/about" component={About}/>
           <Route path="/:title" component={Post}/>
           <Route path="/signup" component={Signup}/>
