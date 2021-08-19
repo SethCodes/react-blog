@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import "../src/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./Components/Navbar";
@@ -14,18 +14,18 @@ import Signup from './Components/Login/Signup';
 function App () {
   
   return (
-    <HashRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <div className="App">
         <NavBar sticky="top" />
         <Switch>
-          <Route exact path="/react-blog/#/" component={Header}/>
-          <Route path="/about" component={About}/>
-          <Route path="/:title" component={Post}/>
-          <Route path="/signup" component={Signup}/>
-          <Route path="/login" component={Login}/>
+          <Route exact path="/react-blog/" component={Header}/>
+          <Route path="/react-blog/about" component={About}/>
+          <Route path="/react-blog/:title" component={Post}/>
+          <Route path="/react-blog/signup" component={Signup}/>
+          <Route path="/react-blog/login" component={Login}/>
         </Switch>
     </div>
-      </HashRouter>
+      </BrowserRouter>
   );
 };
 

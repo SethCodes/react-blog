@@ -134,7 +134,7 @@ alert('works');
                 {!result ? (
                   "Loading"
                 ) : (
-                  <Link to={"/" + result[0].title} onClick={handleArtClick}>
+                  <Link to={"/react-blog/" + result[0].title} onClick={handleArtClick}>
                     {result[0].title}
                   </Link>
                 )}
@@ -161,7 +161,7 @@ alert('works');
                       return (
                         <div key={index}>
                           <Link
-                            to={"/" + article.title}
+                            to={"/react-blog/" + article.title}
                             onClick={handleArtClick}
                           >
                             <h1>{article.title}</h1>
@@ -194,7 +194,7 @@ alert('works');
                       <img src={result[1].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                      <Link to={"/" + result[1].title} onClick={handleArtClick}>
+                      <Link to={"/react-blog/" + result[1].title} onClick={handleArtClick}>
                         <h6>{result[1].title}</h6>
                       </Link>
                       <p>{result[1].author}</p>
@@ -204,7 +204,7 @@ alert('works');
                       <img src={result[0].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                      <Link to={"/" + result[2].title} onClick={handleArtClick}>
+                      <Link to={"/react-blog/" + result[2].title} onClick={handleArtClick}>
                         <h6>{result[2].title}</h6>
                       </Link>
                       <p>{result[2].author}</p>
@@ -251,7 +251,7 @@ alert('works');
                 {!result ? (
                   "Loading"
                 ) : (
-                  <Link to={"/" + result[14].title} onClick={handleArtClick}>
+                  <Link to={"/react-blog/" + result[14].title} onClick={handleArtClick}>
                     <h1>{result[14].title}</h1>
                   </Link>
                 )}
@@ -287,7 +287,7 @@ alert('works');
                           />
                         </Col>
                         <Col>
-                          <Link to={"/" + article.title}>
+                          <Link to={"/react-blog/" + article.title}>
                             <h6>{article.title}</h6>
                           </Link>
                           <p className=" imgAuthor lead">{article.author}</p>

@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Link} from 'react-router-dom';
 function Article({ header, date, author, link, onClick }) {
   return (
     <div>
-    <Link to={'/' + link}
+    <Link to={'/react-blog/' + link}
     onClick={onClick}>
       <h6>{header}</h6></Link>
       <div className={"date-author"}>
