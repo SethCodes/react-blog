@@ -22,9 +22,9 @@ const NavBar = () => {
     unit;
   const iconUrl =
     "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
-  if (navigator.geolocation) {
-    console.log(navigator.geolocation);
-  }
+  // if (navigator.geolocation) {
+  //   console.log(navigator.geolocation);
+  // }
 
   useEffect(() => {
     const getWeather = async () => {
