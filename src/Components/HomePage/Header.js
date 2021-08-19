@@ -11,6 +11,11 @@ import { updateUrl, updateArticle } from "../../actions";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+console.log("treid");
+alert('works');
+
+
+
   //redux
   const stateUrl = useSelector((state) => state.url);
   const stateArt = useSelector((state) => state.article);
