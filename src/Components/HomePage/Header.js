@@ -28,7 +28,7 @@ const Header = () => {
 
   //handle button category change
   const categoryClicked = (e) => {
-    let newUrl = `http://newsapi.org/v2/everything?q=${e.target.innerHTML}&apiKey=${process.env.REACT_APP_NEWS_KEY}`;
+    let newUrl = `https://gnews.io/api/v4/search?q=${e.target.innerHTML}&lang=en&token=${process.env.REACT_APP_GNEWS_KEY}`;
     setCategory(e.target.innerHTML);
     dispatch(updateUrl(newUrl));
   };
@@ -39,24 +39,44 @@ const Header = () => {
   };
 
   //on load and change to url in redux
-  useEffect(() => {
-    const getArticles = async () => {
-      const res = await axios.get(stateUrl);
-      dispatch(updateArticle(res.data.articles));
-      setResult(res.data.articles);
-      setBgImg(res.data.articles[0].urlToImage);
-      setFeatImg(res.data.articles[14].urlToImage);
-    };
-    getArticles();
-    console.log("tried");
+  // useEffect(() => {
+  //   const getArticles = async () => {
+  //     const res = await axios.get(stateUrl);
+  //     dispatch(updateArticle(res.data.articles));
+  //     setResult(res.data.articles);
+  //     setBgImg(res.data.articles[0].urlToImage);
+  //     setFeatImg(res.data.articles[14].urlToImage);
+  //   };
+  //   getArticles();
+  //   console.log("tried");
 
-  }, [stateUrl]);
+  // }, [stateUrl]);
+
+  // const apiKey = process.env.REACT_APP_API_KEY;
+
+
+useEffect(() => {
+  const getArticles = async () => {
+    const res = await axios.get(stateUrl);
+    dispatch(updateArticle(res.data.articles));
+    setResult(res.data.articles);
+    setBgImg(res.data.articles[0].image);
+
+
+
+
+
+  }
+  getArticles();
+
+
+}, [stateUrl]);
 
   return (
     <div>
       <Container
         id="header"
-        style={{ backgroundImage: "url(" + bgImage + ")" }}
+        style={{ backgroundImage: `url("${bgImage}")` }}
         className="header"
         fluid
       >
@@ -190,7 +210,7 @@ const Header = () => {
                 ) : (
                   <Row className="breakingNewsItem">
                     <Col>
-                      <img src={result[1].urlToImage} alt="people" />
+                      <img src={result[1].image} alt="people" />
                     </Col>
                     <Col className="breakCopy">
                       <Link to={"/react-blog/" + result[1].title} onClick={handleArtClick}>
@@ -200,7 +220,7 @@ const Header = () => {
                     </Col>
 
                     <Col>
-                      <img src={result[0].urlToImage} alt="people" />
+                      <img src={result[0].image} alt="people" />
                     </Col>
                     <Col className="breakCopy">
                       <Link to={"/react-blog/" + result[2].title} onClick={handleArtClick}>
@@ -218,7 +238,7 @@ const Header = () => {
       </Container>
 
       {/* FEATURES SECTION */}
-      <Container id="features" fluid>
+      {/* <Container id="features" fluid>
         <Row>
           <Col className=" text-start feature-left" lg={3} md={0} sm={0}>
             {!result
@@ -245,9 +265,9 @@ const Header = () => {
             style={{ backgroundImage: "url(" + featImg + ")" }}
           >
             <div className="featureImgOverlay">
-              <Row className="featCopy">
+              <Row className="featCopy"> */}
                 {/* <Col className=""> */}
-                {!result ? (
+                {/* {!result ? (
                   "Loading"
                 ) : (
                   <Link to={"/react-blog/" + result[14].title} onClick={handleArtClick}>
@@ -264,10 +284,10 @@ const Header = () => {
                   <p className="author lead">
                     {!result ? "Loading" : result[14].author}
                   </p>
-                </Col>
+                </Col> */}
 
                 {/* </Col> */}
-              </Row>
+              {/* </Row>
             </div>
           </Col>
 
@@ -297,7 +317,7 @@ const Header = () => {
             </Row>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 };

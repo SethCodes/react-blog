@@ -22,7 +22,7 @@ const Post = (props) => {
         "loading"
       ) : (
         <div className="postDiv">
-          <img src={post.urlToImage} alt="urlToimage" />
+          <img src={post.image} alt="urlToimage" />
           <div className="content">
             <h1>{post.title}</h1>
             <p>By: {post.author}</p>
