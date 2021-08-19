@@ -44,6 +44,8 @@ const Header = () => {
       setFeatImg(res.data.articles[14].urlToImage);
     };
     getArticles();
+    console.log("tried");
+
   }, [stateUrl]);
 
   return (
