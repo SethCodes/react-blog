@@ -11,8 +11,7 @@ import { updateUrl, updateArticle } from "../../actions";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-console.log("treid");
-alert('works');
+
 
 
 
