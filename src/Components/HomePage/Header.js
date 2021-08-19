@@ -8,8 +8,7 @@ import Article from "./Article";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUrl, updateArticle } from "../../actions";
-import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const Header = () => {
   //redux
@@ -23,27 +22,17 @@ const Header = () => {
   const [featImg, setFeatImg] = useState({ people });
   const [category, setCategory] = useState("ai");
 
-  //
-  // const newUrl = `http://newsapi.org/v2/everything?q=${category}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
-
   //handle button category change
   const categoryClicked = (e) => {
-    let newUrl = `http://newsapi.org/v2/everything?q=${e.target.innerHTML}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
+    let newUrl = `http://newsapi.org/v2/everything?q=${e.target.innerHTML}&apiKey=${process.env.REACT_APP_NEWS_KEY}`;
     setCategory(e.target.innerHTML);
     dispatch(updateUrl(newUrl));
-    
   };
 
+  //store redux articles
   const handleArtClick = (e) => {
-    console.log(e.target
-      )
     dispatch(updateArticle(result));
-
-
-
-
-
-  }
+  };
 
   //on load and change to url in redux
   useEffect(() => {
@@ -55,8 +44,6 @@ const Header = () => {
       setFeatImg(res.data.articles[14].urlToImage);
     };
     getArticles();
-
-
   }, [stateUrl]);
 
   return (
@@ -140,7 +127,9 @@ const Header = () => {
                 {!result ? (
                   "Loading"
                 ) : (
-                    <Link to={"/" + result[0].title} onClick={handleArtClick}>{result[0].title}</Link>
+                  <Link to={"/" + result[0].title} onClick={handleArtClick}>
+                    {result[0].title}
+                  </Link>
                 )}
               </h1>
               <p sm={6} className="date">
@@ -164,15 +153,18 @@ const Header = () => {
                   : result.slice(3, 7).map((article, index) => {
                       return (
                         <div key={index}>
-                            <Link to={"/" + article.title} onClick={handleArtClick}>
-                              <h1>{article.title}</h1>
-                              <p sm={6} className="date">
-                                {article.publishedAt}
-                              </p>
-                              <p sm={6} className="author lead">
-                                {article.author}
-                              </p>
-                            </Link>
+                          <Link
+                            to={"/" + article.title}
+                            onClick={handleArtClick}
+                          >
+                            <h1>{article.title}</h1>
+                            <p sm={6} className="date">
+                              {article.publishedAt}
+                            </p>
+                            <p sm={6} className="author lead">
+                              {article.author}
+                            </p>
+                          </Link>
                           <hr />
                         </div>
                       );
@@ -195,9 +187,9 @@ const Header = () => {
                       <img src={result[1].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                        <Link to={"/" + result[1].title} onClick={handleArtClick}>
-                          <h6>{result[1].title}</h6>
-                        </Link>
+                      <Link to={"/" + result[1].title} onClick={handleArtClick}>
+                        <h6>{result[1].title}</h6>
+                      </Link>
                       <p>{result[1].author}</p>
                     </Col>
 
@@ -205,9 +197,9 @@ const Header = () => {
                       <img src={result[0].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                        <Link to={"/" + result[2].title} onClick={handleArtClick}>
-                          <h6>{result[2].title}</h6>
-                        </Link>
+                      <Link to={"/" + result[2].title} onClick={handleArtClick}>
+                        <h6>{result[2].title}</h6>
+                      </Link>
                       <p>{result[2].author}</p>
                     </Col>
                   </Row>

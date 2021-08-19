@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
 import "../src/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./Components/Navbar";
@@ -14,7 +14,7 @@ import Signup from './Components/Login/Signup';
 function App () {
   
   return (
-    <BrowserRouter>
+    <HashRouter>
     <div className="App">
         <NavBar sticky="top" />
         <Switch>
@@ -25,7 +25,7 @@ function App () {
           <Route path="/login" component={Login}/>
         </Switch>
     </div>
-      </BrowserRouter>
+      </HashRouter>
   );
 };
 
