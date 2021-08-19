@@ -6,47 +6,58 @@ import people from "../../img/people.jpg";
 // import { posts } from "../../posts.js";
 import Article from "./Article";
 import axios from "axios";
-import {useSelector, useDispatch} from 'react-redux';
-import {updateUrl} from '../../actions';
-import {BrowserRouter as Router, Link, BrowserRouter} from 'react-router-dom';
-
+import { useSelector, useDispatch } from "react-redux";
+import { updateUrl, updateArticle } from "../../actions";
+import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 
 
 const Header = () => {
-
-  //redux 
-  const stateUrl = useSelector(state => state.url)
+  //redux
+  const stateUrl = useSelector((state) => state.url);
+  const stateArt = useSelector((state) => state.article);
   const dispatch = useDispatch();
 
-  
+  //state
   const [result, setResult] = useState(null);
   const [bgImage, setBgImg] = useState(null);
   const [featImg, setFeatImg] = useState({ people });
-  const [category, setCategory] = useState('ai');
-  const newUrl = `http://newsapi.org/v2/everything?q=${category}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
-  // const url = `http://newsapi.org/v2/everything?q=ai&apiKey=${APIKEY}`;
+  const [category, setCategory] = useState("ai");
 
+  //
+  // const newUrl = `http://newsapi.org/v2/everything?q=${category}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
+
+  //handle button category change
   const categoryClicked = (e) => {
-    
+    let newUrl = `http://newsapi.org/v2/everything?q=${e.target.innerHTML}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
     setCategory(e.target.innerHTML);
+    dispatch(updateUrl(newUrl));
+    
+  };
+
+  const handleArtClick = (e) => {
+    console.log(e.target
+      )
+    dispatch(updateArticle(result));
+
+
+
+
 
   }
 
-  console.log(" current state is: " + stateUrl);
-
-
+  //on load and change to url in redux
   useEffect(() => {
-    axios.get(stateUrl).then((response) => {
-      setResult(response.data.articles);
-      setBgImg(response.data.articles[0].urlToImage);
-      setFeatImg(response.data.articles[14].urlToImage);
-      
+    const getArticles = async () => {
+      const res = await axios.get(stateUrl);
+      dispatch(updateArticle(res.data.articles));
+      setResult(res.data.articles);
+      setBgImg(res.data.articles[0].urlToImage);
+      setFeatImg(res.data.articles[14].urlToImage);
+    };
+    getArticles();
 
-    }).then(() => dispatch(updateUrl(newUrl)));
-    console.log('changed state url: '+ stateUrl);
 
-  }, [category, stateUrl]);
-
+  }, [stateUrl]);
 
   return (
     <div>
@@ -59,31 +70,60 @@ const Header = () => {
         <div className="overlay">
           <Row>
             <Container id="category-nav" className="line transparent" fluid>
-              <Navbar className="">
-                <Nav className="">
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+              <div className="navbar navbar-expand navbar-light">
+                <div className="nav">
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     World
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Politics
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Health
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Business
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Tech
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Environment
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Sports
-                  </Nav.Link>
-                </Nav>
-              </Navbar>
+                  </Link>
+                  <h1>{}</h1>
+                </div>
+              </div>
             </Container>
           </Row>
           <Row id="headline">
@@ -100,7 +140,7 @@ const Header = () => {
                 {!result ? (
                   "Loading"
                 ) : (
-                  <a href={"/" + result[0].title}>{result[0].title}</a>
+                    <Link to={"/" + result[0].title} onClick={handleArtClick}>{result[0].title}</Link>
                 )}
               </h1>
               <p sm={6} className="date">
@@ -124,17 +164,15 @@ const Header = () => {
                   : result.slice(3, 7).map((article, index) => {
                       return (
                         <div key={index}>
-                        <BrowserRouter>
-                          <Link to={"/react-blog/" + article.title}>
-                            <h1>{article.title}</h1>
-                            <p sm={6} className="date">
-                              {article.publishedAt}
-                            </p>
-                            <p sm={6} className="author lead">
-                              {article.author}
-                            </p>
-                          </Link>
-                          </BrowserRouter>
+                            <Link to={"/" + article.title} onClick={handleArtClick}>
+                              <h1>{article.title}</h1>
+                              <p sm={6} className="date">
+                                {article.publishedAt}
+                              </p>
+                              <p sm={6} className="author lead">
+                                {article.author}
+                              </p>
+                            </Link>
                           <hr />
                         </div>
                       );
@@ -157,9 +195,9 @@ const Header = () => {
                       <img src={result[1].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                      <a href={"/" + result[1].title}>
-                        <h6>{result[1].title}</h6>
-                      </a>
+                        <Link to={"/" + result[1].title} onClick={handleArtClick}>
+                          <h6>{result[1].title}</h6>
+                        </Link>
                       <p>{result[1].author}</p>
                     </Col>
 
@@ -167,9 +205,9 @@ const Header = () => {
                       <img src={result[0].urlToImage} alt="people" />
                     </Col>
                     <Col className="breakCopy">
-                      <a href={"/" + result[2].title}>
-                        <h6>{result[2].title}</h6>
-                      </a>
+                        <Link to={"/" + result[2].title} onClick={handleArtClick}>
+                          <h6>{result[2].title}</h6>
+                        </Link>
                       <p>{result[2].author}</p>
                     </Col>
                   </Row>
@@ -195,6 +233,7 @@ const Header = () => {
                         header={article.title}
                         date={article.publishedAt}
                         author={article.author}
+                        onClick={handleArtClick}
                       />
                     </Row>
                   );
@@ -213,9 +252,9 @@ const Header = () => {
                 {!result ? (
                   "Loading"
                 ) : (
-                  <a href={"/" + result[14].title}>
+                  <Link to={"/" + result[14].title} onClick={handleArtClick}>
                     <h1>{result[14].title}</h1>
-                  </a>
+                  </Link>
                 )}
 
                 <Col>
@@ -249,9 +288,9 @@ const Header = () => {
                           />
                         </Col>
                         <Col>
-                          <a href={"/" + article.title}>
+                          <Link to={"/" + article.title}>
                             <h6>{article.title}</h6>
-                          </a>
+                          </Link>
                           <p className=" imgAuthor lead">{article.author}</p>
                         </Col>
                       </div>
