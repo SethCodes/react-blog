@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import {testPosts} from '../../testPosts';
 
 
-const Header = () => {
 
 //in testing, use this section
 //console.log(testPosts);
@@ -257,7 +256,7 @@ useEffect(() => {
                   <p className="author lead">
                     {!result ? "Loading" : result[1].author}
                   </p>
-                </Col>
+                </Col> */}
 
                 </Col>
               </Row>
