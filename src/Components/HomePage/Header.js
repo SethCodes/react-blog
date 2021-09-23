@@ -11,7 +11,7 @@ import { updateUrl, updateArticle } from "../../actions";
 import { Link } from "react-router-dom";
 import {testPosts} from '../../testPosts';
 
-
+const Header = () => {
 
 //in testing, use this section
 //console.log(testPosts);
@@ -258,12 +258,12 @@ useEffect(() => {
                   </p>
                 </Col> */}
 
-                </Col>
-              </Row>
-            </div>
-          </Col>
+                {/* </Col> */}
+              {/* </Row> */}
+            {/* </div>
+          </Col> */}
 
-          <Col className="feature-right" md={3} sm={12}>
+          {/* <Col className="feature-right" md={3} sm={12}>
             <Row className="featRRow">
               {!result
                 ? "Loading"
@@ -289,7 +289,7 @@ useEffect(() => {
             </Row>
           </Col>
         </Row>
-      </Container> */}
+      </Container>  */}
     </div>
   );
 };
