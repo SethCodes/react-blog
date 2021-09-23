@@ -121,6 +121,9 @@ Nav.Link {
   border: 1px solid red;
   /* margin-right: 25px; */
   margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #header-scroll hr {
   color: red;
