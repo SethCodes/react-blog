@@ -4,3 +4,10 @@ export const updateUrl = (url) => {
         url: url
     };
 }
+
+export const updateArticle = (article) => {
+    return {
+        type: 'UPDATE_ARTICLE',
+        article: article
+    }
+}

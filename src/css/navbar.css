@@ -1,6 +1,10 @@
 .nav {
   position: fixed-top;
 }
+.nav-logo{
+  display: flex;
+  justify-content: center;
+}
 .transparent {
   background: rgba(0, 0, 0, 0.8);
 }
@@ -24,4 +28,14 @@
 #navbar a {
   color: white;
   font: 1rem;
+}
+#navbar img{
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+
+}
+#navbar p{
+  padding: 0 5px;
+
 }

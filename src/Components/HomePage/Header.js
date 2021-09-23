@@ -6,93 +6,132 @@ import people from "../../img/people.jpg";
 // import { posts } from "../../posts.js";
 import Article from "./Article";
 import axios from "axios";
-import {useSelector, useDispatch} from 'react-redux';
-import {updateUrl} from '../../actions';
-import {BrowserRouter as Router, Link, BrowserRouter} from 'react-router-dom';
-
+import { useSelector, useDispatch } from "react-redux";
+import { updateUrl, updateArticle } from "../../actions";
+import { Link } from "react-router-dom";
+import {testPosts} from '../../testPosts';
 
 
 const Header = () => {
 
-  //redux 
-  const stateUrl = useSelector(state => state.url)
+//in testing, use this section
+//console.log(testPosts);
+
+
+
+  //redux
+  const stateUrl = useSelector((state) => state.url);
   const dispatch = useDispatch();
 
-  
+  //state
   const [result, setResult] = useState(null);
   const [bgImage, setBgImg] = useState(null);
   const [featImg, setFeatImg] = useState({ people });
-  const [category, setCategory] = useState('ai');
-  const newUrl = `http://newsapi.org/v2/everything?q=${category}&apiKey=41d85d23b2f640b0892f12ae01b9a373`;
-  // const url = `http://newsapi.org/v2/everything?q=ai&apiKey=${APIKEY}`;
+  const [category, setCategory] = useState("tech");
 
+  //handle button category change
   const categoryClicked = (e) => {
-    
+    let newUrl = `https://gnews.io/api/v4/search?q=${e.target.innerHTML}&lang=en&token=${process.env.REACT_APP_GNEWS_KEY}`;
     setCategory(e.target.innerHTML);
+    dispatch(updateUrl(newUrl));
+  };
+
+  //store redux articles
+  const handleArtClick = (e) => {
+    dispatch(updateArticle(result));
+  };
+
+
+//testing set variables
+useEffect(() => {
+  const getArticles = async () => {
+    const res = await axios.get(stateUrl);
+    dispatch(updateArticle(res.data.articles));
+    // setResult(testPosts);
+    // setBgImg(testPosts[0].image);
+    setResult(res.data.articles);
+    setBgImg(res.data.articles[0].image);
 
   }
-
-  console.log(" current state is: " + stateUrl);
-
-
-  useEffect(() => {
-    axios.get(stateUrl).then((response) => {
-      setResult(response.data.articles);
-      setBgImg(response.data.articles[0].urlToImage);
-      setFeatImg(response.data.articles[14].urlToImage);
-      
-
-    }).then(() => dispatch(updateUrl(newUrl)));
-    console.log('changed state url: '+ stateUrl);
-
-  }, [category, stateUrl]);
-
+  getArticles();
+}, [stateUrl]);
 
   return (
     <div>
       <Container
         id="header"
-        style={{ backgroundImage: "url(" + bgImage + ")" }}
+        style={{ backgroundImage: `url("${bgImage}")` }}
         className="header"
         fluid
       >
         <div className="overlay">
           <Row>
             <Container id="category-nav" className="line transparent" fluid>
-              <Navbar className="">
-                <Nav className="">
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+              <div className="navbar navbar-expand navbar-light">
+                <div className="nav categories">
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     World
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Politics
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Health
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Business
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Tech
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Environment
-                  </Nav.Link>
-                  <Nav.Link onClick={categoryClicked} className="nav-2-item text-white" href="#">
+                  </Link>
+                  <Link
+                    onClick={categoryClicked}
+                    className="nav-2-item text-white"
+                    to="#"
+                  >
                     Sports
-                  </Nav.Link>
-                </Nav>
-              </Navbar>
+                  </Link>
+                  <h1>{}</h1>
+                </div>
+              </div>
             </Container>
           </Row>
+
+
           <Row id="headline">
             <Col
               lg={7}
               md={12}
               sm={12}
               id="headlineH1"
-              className="col-center text-left"
+              className=" text-left"
             >
               {/* {mainTitle} */}
 
@@ -100,7 +139,9 @@ const Header = () => {
                 {!result ? (
                   "Loading"
                 ) : (
-                  <a href={"/" + result[0].title}>{result[0].title}</a>
+                  <Link to={"/react-blog/" + result[0].title} onClick={handleArtClick}>
+                    {result[0].title}
+                  </Link>
                 )}
               </h1>
               <p sm={6} className="date">
@@ -124,8 +165,10 @@ const Header = () => {
                   : result.slice(3, 7).map((article, index) => {
                       return (
                         <div key={index}>
-                        <BrowserRouter>
-                          <Link to={"/react-blog/" + article.title}>
+                          <Link
+                            to={"/react-blog/" + article.title}
+                            onClick={handleArtClick}
+                          >
                             <h1>{article.title}</h1>
                             <p sm={6} className="date">
                               {article.publishedAt}
@@ -134,7 +177,6 @@ const Header = () => {
                               {article.author}
                             </p>
                           </Link>
-                          </BrowserRouter>
                           <hr />
                         </div>
                       );
@@ -152,27 +194,14 @@ const Header = () => {
                 {!result ? (
                   "Loading..."
                 ) : (
-                  <Row className="breakingNewsItem">
-                    <Col>
-                      <img src={result[1].urlToImage} alt="people" />
-                    </Col>
-                    <Col className="breakCopy">
-                      <a href={"/" + result[1].title}>
-                        <h6>{result[1].title}</h6>
-                      </a>
-                      <p>{result[1].author}</p>
-                    </Col>
-
-                    <Col>
-                      <img src={result[0].urlToImage} alt="people" />
-                    </Col>
-                    <Col className="breakCopy">
-                      <a href={"/" + result[2].title}>
-                        <h6>{result[2].title}</h6>
-                      </a>
-                      <p>{result[2].author}</p>
-                    </Col>
-                  </Row>
+                  <div className="bSec">
+                    <Breaking
+                    image={bgImage}
+                    title={result[0].title} />
+                    <Breaking
+                    image={bgImage}
+                    title={result[0].title} />
+                  </div>
                 )}
               </Col>
               <Col md={4}></Col>
@@ -182,7 +211,7 @@ const Header = () => {
       </Container>
 
       {/* FEATURES SECTION */}
-      <Container id="features" fluid>
+      {/* <Container id="features" fluid>
         <Row>
           <Col className=" text-start feature-left" lg={3} md={0} sm={0}>
             {!result
@@ -195,6 +224,7 @@ const Header = () => {
                         header={article.title}
                         date={article.publishedAt}
                         author={article.author}
+                        onClick={handleArtClick}
                       />
                     </Row>
                   );
@@ -209,27 +239,27 @@ const Header = () => {
           >
             <div className="featureImgOverlay">
               <Row className="featCopy">
-                {/* <Col className=""> */}
+                <Col className="">
                 {!result ? (
                   "Loading"
                 ) : (
-                  <a href={"/" + result[14].title}>
-                    <h1>{result[14].title}</h1>
-                  </a>
+                  <Link to={"/react-blog/" + result[1].title} onClick={handleArtClick}>
+                    <h1>{result[1].title}</h1>
+                  </Link>
                 )}
 
                 <Col>
                   <p className="date">
-                    {!result ? "Loading" : result[14].publishedAt}
+                    {!result ? "Loading" : result[1].publishedAt}
                   </p>
                 </Col>
                 <Col>
                   <p className="author lead">
-                    {!result ? "Loading" : result[14].author}
+                    {!result ? "Loading" : result[1].author}
                   </p>
                 </Col>
 
-                {/* </Col> */}
+                </Col>
               </Row>
             </div>
           </Col>
@@ -238,7 +268,7 @@ const Header = () => {
             <Row className="featRRow">
               {!result
                 ? "Loading"
-                : result.slice(10, 14).map((article) => {
+                : result.slice(1, 4).map((article) => {
                     return (
                       <div className="featRRow">
                         <Col>
@@ -249,9 +279,9 @@ const Header = () => {
                           />
                         </Col>
                         <Col>
-                          <a href={"/" + article.title}>
+                          <Link to={"/react-blog/" + article.title}>
                             <h6>{article.title}</h6>
-                          </a>
+                          </Link>
                           <p className=" imgAuthor lead">{article.author}</p>
                         </Col>
                       </div>
@@ -260,9 +290,19 @@ const Header = () => {
             </Row>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 };
+
+const Breaking = ({image, title}) => {
+  return(
+    <div className="" id="breaking">
+      <img src={image} alt="breaking bImg"/>
+      <h6>{title}</h6>
+
+    </div>
+  )
+}
 
 export default Header;
