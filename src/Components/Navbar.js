@@ -7,6 +7,7 @@ import logo from "../img/Icon.png";
 import axios from "axios";
 
 const NavBar = () => {
+  //remove weather for another app
   // const [city, setCity] = useState("Dayton");
   // const [forecast, setForecast] = useState("?");
   // const [weatherIcon, setWeatherIcon] = useState("?");
