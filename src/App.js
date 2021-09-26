@@ -4,7 +4,7 @@ import "../src/index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./Components/Navbar";
 import "./css/App.css";
-import Header from "./Components/HomePage/Header";
+import Home from "./Components/Home";
 import Post from './Components/Post';
 import About from './Components/About';
 import Login from './Components/Login/Login';
@@ -18,7 +18,7 @@ function App () {
     <div className="App">
         <NavBar sticky="top" />
         <Switch>
-          <Route exact path="/" component={Header}/>
+          <Route exact path="/" component={Home}/>
           <Route path="/react-blog/about" component={About}/>
           <Route path="/react-blog/:title" component={Post}/>
           <Route path="/react-blog/signup" component={Signup}/>

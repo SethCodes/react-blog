@@ -1,0 +1,149 @@
+h1,h2,h3,h4,h5,h6,p{
+    color: white;
+}
+
+.home{
+    padding: 0;
+}
+
+.overlay{
+    position: absolute;
+    background: rgba(0, 37, 250, 0.5);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.transparent {
+    background: rgba(0, 0, 0, 0.8);
+  }
+.header{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    object-position: left;
+    padding: 40px 0;
+}
+.categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 55px;
+    background: rgba(0, 0, 0, 0.5);
+
+    
+}
+.category{
+    padding: 40px 20px;
+    color: white;
+    text-decoration: none;
+
+}
+.category:hover{
+    transform: scale(1.5);
+    color: white;
+}
+.mainTitle{
+    display: flex;
+    flex-direction: column;
+    flex-direction: center;
+    align-content: center;
+    height: 80vh;
+    padding: 10vh 0 0 40px;
+}
+.headline a{
+    text-decoration: none;
+}
+.headline h1{
+    font-size: 6vh;
+}
+.auth-date{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    justify-items: center;
+}
+.auth-date p{
+    padding-right: 20px;
+}
+
+.articleTitle{
+    padding: 20px;
+    color: black;
+
+}
+.scrollDiv{
+    padding: 10vh 60px;
+}
+.scrollLinks{
+    padding-top: 50px;
+}
+.overflow-auto{
+    max-height: 250px;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+.breakingDiv{
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    background-color: #ffffff;
+    padding: 10px;
+}
+.breakingDiv h4{
+    display: inline-block;
+    background-color: red;
+    padding: 5px 20px 5px 15px;
+    position: absolute;
+    top: -38px;
+    left: 0px;
+}
+
+#breaking{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    
+}
+#breaking h6{
+    color: black;
+}
+
+#breaking img{
+    width: 50%;
+    height: 50%;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 991px){
+
+    .mainTitle{
+        padding: 100px 40px;
+    }
+    .category{
+        padding: 10px 10px;
+    }
+    .breakingDiv{
+       width: 80%;
+       bottom: 20px;
+    }
+    .scrollDiv{
+        padding: 120px 40px 0px;
+        margin-bottom: 50px;
+    }
+
+}
+@media only screen and (max-width: 740px){
+
+    
+    .breakingDiv{
+       width: 100%;
+       bottom: 20px;
+       padding-right: 40px;
+    }
+
+}

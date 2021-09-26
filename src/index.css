@@ -1,4 +1,6 @@
 html, body{
-    min-width: 500px;
+    min-width: 350px;
+    background-color: rgba(0, 37, 250, 0.5);
+
 }
 
