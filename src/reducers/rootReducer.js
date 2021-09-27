@@ -1,5 +1,5 @@
 const intialState = {
-    url: `https://gnews.io/api/v4/search?q=tech&lang=en&token=${process.env.REACT_APP_GNEWS_KEY}`,
+    url: `https://gnews.io/api/v4/search?q=web&lang=en&token=${process.env.REACT_APP_GNEWS_KEY}`,
     article: ''
 }
 

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateUrl, updateArticle } from "../actions";
 import { Link } from "react-router-dom";
 import { testPosts } from "../testPosts";
+import axios from 'axios';
+
 
 const Home = () => {
   //redux
@@ -13,7 +15,7 @@ const Home = () => {
   //state
   const [result, setResult] = useState(null);
   const [bgImg, setBgImg] = useState(null);
-  const [category, setCategory] = useState("tech");
+  const [category, setCategory] = useState("");
 
   //handle button category change
   const categoryClicked = (e) => {
@@ -32,12 +34,12 @@ const Home = () => {
   //dev use test post setters
   useEffect(() => {
     const getArticles = async () => {
-      // const res = await axios.get(stateUrl);
-      // dispatch(updateArticle(res.data.articles));
-      setResult(testPosts);
-      setBgImg(testPosts[0].image);
-      // setResult(res.data.articles);
-      // setBgImg(res.data.articles[0].image);
+      const res = await axios.get(stateUrl);
+      dispatch(updateArticle(res.data.articles));
+    //   setResult(testPosts);
+    //   setBgImg(testPosts[0].image);
+      setResult(res.data.articles);
+      setBgImg(res.data.articles[0].image);
     };
     getArticles();
   }, [stateUrl]);
