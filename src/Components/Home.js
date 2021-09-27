@@ -41,7 +41,6 @@ const Home = () => {
     };
     getArticles();
   }, [stateUrl]);
-  console.log(result);
 
   return (
     <div
@@ -122,6 +121,7 @@ const Home = () => {
                               <Breaking
                                 image={article.image}
                                 title={article.title}
+                                onClick={handleArtClick}
                               />
                             </div>
                           );
@@ -130,24 +130,20 @@ const Home = () => {
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12 scrollDiv">
-                {!result ? (
-                  "loading..."
-                ) : (
-                  <div className="overflow-auto">
-                    {result.slice(3, 7).map((article) => {
-                      return (
-                        <div className="scrollLinks">
-                          <ArticleTitle
-                            title={article.title}
-                            name={article.source.name}
-                            date={article.publishedAt}
-                          />
-                          ;
-                        </div>
-                      );
+                <div className="overflow-auto">
+                    {!result ? "Loading..." : result.slice(3,7).map((article) => {
+                        return(
+                            <Link to={"/react-blog/" + article.title}>
+                                <ArticleTitle 
+                                    title={article.title}
+                                    name={article.source.name}
+                                    date={article.publishedAt}
+                                    onClick={handleArtClick}
+                                />
+                            </Link>
+                        )
                     })}
-                  </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
@@ -161,8 +157,10 @@ const Home = () => {
 const Breaking = ({ image, title }) => {
   return (
     <div className="" id="breaking">
-      <img src={image} alt="breaking bImg" />
-      <h6>{title}</h6>
+      <Link to={"/react-blog/" + title}>
+        <img src={image} alt="breaking bImg" />
+        <h6>{title}</h6>
+      </Link>
     </div>
   );
 };
@@ -171,11 +169,12 @@ const Breaking = ({ image, title }) => {
 const ArticleTitle = ({ title, name, date }) => {
   return (
     <div className="articleTitle">
-      <h3>{title}</h3>
-      <div className="auth-date">
-        <p>{name}</p>
-        <p>{date}</p>
-      </div>
+        <h3>{title}</h3>
+        <div className="auth-date">
+          <p>{name}</p>
+          <p>{date}</p>
+        </div>
+      
     </div>
   );
 };
